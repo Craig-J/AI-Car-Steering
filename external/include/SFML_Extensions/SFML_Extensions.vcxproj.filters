@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="SFML_Extensions %28sfx%29">
+      <UniqueIdentifier>{2407df5c-c6b7-4fdb-8b03-89e0d03ea90e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML_Extensions %28sfx%29\Graphics">
+      <UniqueIdentifier>{4489f52d-c6c0-4acf-ba1f-e286df986d30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML_Extensions %28sfx%29\Audio">
+      <UniqueIdentifier>{b3406b95-c8a3-4eb0-98c4-92a13345416d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML_Extensions %28sfx%29\System">
+      <UniqueIdentifier>{87fbd094-d90f-4bd1-8a95-43220de6b4d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML_Extensions %28sfx%29\Window">
+      <UniqueIdentifier>{b063493d-3e38-4be7-8330-d28a2489340b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML %28sf%29">
+      <UniqueIdentifier>{188c94ca-6e94-4b00-9546-fdee617f7385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML %28sf%29\Graphics">
+      <UniqueIdentifier>{31960aef-3dfa-42a4-9ebc-049361df7444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML %28sf%29\Audio">
+      <UniqueIdentifier>{fb8d077f-db35-43a1-b913-62005edba360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML %28sf%29\Network">
+      <UniqueIdentifier>{ec5999bc-645a-4cbb-9f5c-eed585a32e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML %28sf%29\Window">
+      <UniqueIdentifier>{ce76862d-ed39-4863-9d55-567cdb2d6136}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML %28sf%29\System">
+      <UniqueIdentifier>{830a5559-ba2f-4aeb-8199-6070c1765daf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="global.cpp">
+      <Filter>SFML_Extensions %28sfx%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\animation.cpp">
+      <Filter>SFML_Extensions %28sfx%29\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\button.cpp">
+      <Filter>SFML_Extensions %28sfx%29\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\sprite.cpp">
+      <Filter>SFML_Extensions %28sfx%29\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\input_manager.cpp">
+      <Filter>SFML_Extensions %28sfx%29\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="System\application.cpp">
+      <Filter>SFML_Extensions %28sfx%29\System</Filter>
+    </ClCompile>
+    <ClCompile Include="System\clock.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="global.h">
+      <Filter>SFML_Extensions %28sfx%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\animation.h">
+      <Filter>SFML_Extensions %28sfx%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\button.h">
+      <Filter>SFML_Extensions %28sfx%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\sprite.h">
+      <Filter>SFML_Extensions %28sfx%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\texture_manager.h">
+      <Filter>SFML_Extensions %28sfx%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\audio_manager.h">
+      <Filter>SFML_Extensions %28sfx%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\input_manager.h">
+      <Filter>SFML_Extensions %28sfx%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="System\application.h">
+      <Filter>SFML_Extensions %28sfx%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="System\frame_clock.h">
+      <Filter>SFML_Extensions %28sfx%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="System\system_HUD.h">
+      <Filter>SFML_Extensions %28sfx%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio.hpp">
+      <Filter>SFML %28sf%29</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Config.hpp">
+      <Filter>SFML %28sf%29</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics.hpp">
+      <Filter>SFML %28sf%29</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Main.hpp">
+      <Filter>SFML %28sf%29</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network.hpp">
+      <Filter>SFML %28sf%29</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\OpenGL.hpp">
+      <Filter>SFML %28sf%29</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System.hpp">
+      <Filter>SFML %28sf%29</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window.hpp">
+      <Filter>SFML %28sf%29</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\BlendMode.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\CircleShape.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Color.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\ConvexShape.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Drawable.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Export.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Font.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Glyph.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Image.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\PrimitiveType.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Rect.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\RectangleShape.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\RenderStates.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\RenderTarget.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\RenderTexture.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\RenderWindow.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Shader.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Shape.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Sprite.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Text.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Texture.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Transform.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Transformable.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\Vertex.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\VertexArray.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Graphics\View.hpp">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\AlResource.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\Export.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\InputSoundFile.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\Listener.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\Music.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\OutputSoundFile.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\Sound.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\SoundBuffer.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\SoundBufferRecorder.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\SoundFileFactory.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\SoundFileReader.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\SoundFileWriter.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\SoundRecorder.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\SoundSource.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Audio\SoundStream.hpp">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network\Export.hpp">
+      <Filter>SFML %28sf%29\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network\Ftp.hpp">
+      <Filter>SFML %28sf%29\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network\Http.hpp">
+      <Filter>SFML %28sf%29\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network\IpAddress.hpp">
+      <Filter>SFML %28sf%29\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network\Packet.hpp">
+      <Filter>SFML %28sf%29\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network\Socket.hpp">
+      <Filter>SFML %28sf%29\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network\SocketHandle.hpp">
+      <Filter>SFML %28sf%29\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network\SocketSelector.hpp">
+      <Filter>SFML %28sf%29\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network\TcpListener.hpp">
+      <Filter>SFML %28sf%29\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network\TcpSocket.hpp">
+      <Filter>SFML %28sf%29\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Network\UdpSocket.hpp">
+      <Filter>SFML %28sf%29\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\Context.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\ContextSettings.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\Event.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\Export.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\GlResource.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\Joystick.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\Keyboard.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\Mouse.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\Sensor.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\Touch.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\VideoMode.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\Window.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\WindowHandle.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\Window\WindowStyle.hpp">
+      <Filter>SFML %28sf%29\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\Clock.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\Err.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\Export.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\FileInputStream.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\InputStream.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\Lock.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\MemoryInputStream.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\Mutex.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\NonCopyable.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\Sleep.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\String.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\Thread.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\ThreadLocal.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\ThreadLocalPtr.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\Time.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\Utf.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\Vector2.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SFML\System\Vector3.hpp">
+      <Filter>SFML %28sf%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="System\vector2.h">
+      <Filter>SFML_Extensions %28sfx%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="System\clock.h">
+      <Filter>SFML_Extensions %28sfx%29\System</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\SFML\Graphics\Rect.inl">
+      <Filter>SFML %28sf%29\Graphics</Filter>
+    </None>
+    <None Include="include\SFML\Audio\SoundFileFactory.inl">
+      <Filter>SFML %28sf%29\Audio</Filter>
+    </None>
+    <None Include="include\SFML\System\String.inl">
+      <Filter>SFML %28sf%29\System</Filter>
+    </None>
+    <None Include="include\SFML\System\Thread.inl">
+      <Filter>SFML %28sf%29\System</Filter>
+    </None>
+    <None Include="include\SFML\System\ThreadLocalPtr.inl">
+      <Filter>SFML %28sf%29\System</Filter>
+    </None>
+    <None Include="include\SFML\System\Utf.inl">
+      <Filter>SFML %28sf%29\System</Filter>
+    </None>
+    <None Include="include\SFML\System\Vector2.inl">
+      <Filter>SFML %28sf%29\System</Filter>
+    </None>
+    <None Include="include\SFML\System\Vector3.inl">
+      <Filter>SFML %28sf%29\System</Filter>
+    </None>
+  </ItemGroup>
+</Project>

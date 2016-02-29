@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Agnostic %28agn%29">
+      <UniqueIdentifier>{7f906d60-b286-4f68-87c9-7333e9879b6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Agnostic %28agn%29\Patterns">
+      <UniqueIdentifier>{21205019-d202-4336-883f-a9bdad948532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Agnostic %28agn%29\Utilities">
+      <UniqueIdentifier>{b005210f-ca1a-4e37-a5e7-89abe3cfed4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Agnostic %28agn%29\Graphics">
+      <UniqueIdentifier>{6d6b211a-bdb4-439f-95d8-c2c0272fc4be}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sprite_animation.cpp">
+      <Filter>Agnostic %28agn%29\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="logger.cpp">
+      <Filter>Agnostic %28agn%29\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="updateable.cpp">
+      <Filter>Agnostic %28agn%29\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="updateable_templated.cpp">
+      <Filter>Agnostic %28agn%29\Utilities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="command.h">
+      <Filter>Agnostic %28agn%29\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="generic_state.h">
+      <Filter>Agnostic %28agn%29\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="singleton.h">
+      <Filter>Agnostic %28agn%29\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite_animation.h">
+      <Filter>Agnostic %28agn%29\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="updateable_templated.h">
+      <Filter>Agnostic %28agn%29\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="logger.h">
+      <Filter>Agnostic %28agn%29\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="resource_manager.h">
+      <Filter>Agnostic %28agn%29\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="updateable.h">
+      <Filter>Agnostic %28agn%29\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>Agnostic %28agn%29\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="string.h">
+      <Filter>Agnostic %28agn%29\Utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
