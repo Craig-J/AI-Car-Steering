@@ -2,6 +2,7 @@
 #define _AGNOSTIC_LOGGER_H_
 
 #define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
 #include <Windows.h>
 #include <iostream>
 #include <ctime>

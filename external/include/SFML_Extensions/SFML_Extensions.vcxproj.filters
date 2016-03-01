@@ -54,7 +54,9 @@
     <ClCompile Include="System\application.cpp">
       <Filter>SFML_Extensions %28sfx%29\System</Filter>
     </ClCompile>
-    <ClCompile Include="System\clock.cpp" />
+    <ClCompile Include="System\clock.cpp">
+      <Filter>SFML_Extensions %28sfx%29\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
