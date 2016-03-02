@@ -15,7 +15,8 @@ AI_App::AI_App(sf::RenderWindow& _window) :
 	rule_block_(new fl::RuleBlock),
 	initial(),
 	current(),
-	paused(false)
+	paused(false),
+	timestep(0.1f)
 {}
 
 AI_App::~AI_App()
@@ -38,6 +39,11 @@ bool AI_App::Initialize()
 	output_.setCharacterSize(24);
 	output_.setColor(sf::Color::White);
 	output_.setPosition(window_centre.x, window_.getSize().y);
+
+	timestep_.setFont(font_);
+	timestep_.setCharacterSize(24);
+	timestep_.setColor(sf::Color(255, 69, 0));
+	timestep_.setPosition(window_centre.x, 0.0f);
 
 	line_ = sfx::Sprite(window_centre, Global::TextureManager.Load("arrow_white.png"));
 
@@ -165,7 +171,7 @@ void AI_App::GetUserConsoleInput()
 	std::string answer;
 	Log::Message("Animate car continuous or discretely? (C/D)");
 	Log::Message("Continuous - car will animate in real time.");
-	Log::Message("Discrete - car will animate one step at a time. (0.1s steps)");
+	Log::Message("Discrete - car will animate one step at a time.");
 	std::cin >> answer;
 	while (!(answer == "C" || answer == "c" || answer == "D" || answer == "d"))
 	{
@@ -185,8 +191,12 @@ void AI_App::GetUserConsoleInput()
 	{
 		real_time = false;
 		paused = false;
+		timestep = 0.1f;
 		Log::Message("The SFML window will now animate the car.");
 		Log::Message("Press spacebar to step forward the animation.");
+		Log::Message("Default timestep is 0.1.");
+		Log::Message("Press T to increase timestep by 0.1.");
+		Log::Message("Press F to decrease timestep by 0.1.");
 		Log::Message("Press R to reset the animation.");
 		Log::Message("Press S to restart with new input values.");
 	}
@@ -222,9 +232,9 @@ void AI_App::UpdateGraphicsObjects()
 	steering_indicator_.setRotation(current.steering * 90.0f);
 
 	std::string output;
-	output.append("Displacement: " + agn::to_string_precise(current.displacement, 1));
-	output.append(" Velocity: " + agn::to_string_precise(current.velocity, 1));
-	output.append(" Steering: " + agn::to_string_precise(current.steering, 1));
+	output.append("Displacement: " + agn::to_string_precise(current.displacement, 3));
+	output.append(" Velocity: " + agn::to_string_precise(current.velocity, 3));
+	output.append(" Steering: " + agn::to_string_precise(current.steering, 3));
 	output_.setString(output);
 }
 
@@ -257,10 +267,10 @@ bool AI_App::Update()
 	{
 		if (Global::Input.KeyPressed(sf::Keyboard::Space))
 		{
-			current.velocity += current.steering * 0.1f;
+			current.velocity += current.steering * timestep;
 			velocity_->setInputValue(current.velocity);
 
-			current.displacement += current.velocity * 0.1f;
+			current.displacement += current.velocity * timestep;
 			displacement_->setInputValue(current.displacement);
 
 			engine_->process();
@@ -273,11 +283,21 @@ bool AI_App::Update()
 	if (Global::Input.KeyPressed(sf::Keyboard::R))
 	{
 		current = initial;
+		UpdateGraphicsObjects();
 	}
 
 	if (Global::Input.KeyPressed(sf::Keyboard::S))
 	{
 		GetUserConsoleInput();
+	}
+
+	if (Global::Input.KeyPressed(sf::Keyboard::T))
+	{
+		timestep += 0.1;
+	}
+	if (Global::Input.KeyPressed(sf::Keyboard::F))
+	{
+		timestep -= 0.1;
 	}
 	
 	return true;
@@ -292,6 +312,14 @@ void AI_App::Render()
 	output_.setOrigin(output_.getLocalBounds().width / 2.0f, output_.getLocalBounds().height);
 	output_.setPosition(window_centre.x, window_.getSize().y - (output_.getLocalBounds().height));
 	window_.draw(output_);
+
+	if (!real_time)
+	{
+		timestep_.setString("Timestep: " + agn::to_string_precise(timestep, 1));
+		timestep_.setOrigin(timestep_.getLocalBounds().width / 2.0f, timestep_.getLocalBounds().height);
+		timestep_.setPosition(window_centre.x, (timestep_.getLocalBounds().height));
+		window_.draw(timestep_);
+	}
 
 	if(paused)
 		window_.draw(pause_overlay);
