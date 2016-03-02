@@ -40,7 +40,7 @@ namespace fl {
         struct Option {
             std::string key, value, description;
 
-            Option(const std::string& key = "", const std::string& value = "", const std::string& description = "") :
+            explicit Option(const std::string& key = "", const std::string& value = "", const std::string& description = "") :
             key(key), value(value), description(description) {
             }
         };
@@ -72,8 +72,9 @@ namespace fl {
         static std::string interactiveHelp();
 
         static void exportAllExamples(const std::string& from, const std::string& to);
-#if defined(FL_UNIX) && ! defined(FL_APPLE)
-        static void benchmarkExamples(int runs);
+        static void exportAllExamples(const std::string& from, const std::string& to, const std::string& path);
+#ifdef FL_CPP11
+        static void benchmarkExamples(const std::string& path, int runs);
 #endif
 
     public:

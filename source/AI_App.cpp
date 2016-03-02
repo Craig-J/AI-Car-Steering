@@ -12,13 +12,12 @@ namespace
 AI_App::AI_App(sf::RenderWindow& _window) :
 	Application(_window),
 	engine_(new fl::Engine("Fuzzy Car Controller")),
-	displacement_(new fl::InputVariable),
 	velocity_(new fl::InputVariable),
 	steering_(new fl::OutputVariable),
 	rule_block_(new fl::RuleBlock),
-	displacement(double()),
-	velocity(double()),
-	steering(double())
+	initial(),
+	current(),
+	paused(false)
 {}
 
 AI_App::~AI_App()
@@ -46,72 +45,74 @@ bool AI_App::Initialize()
 
 	car_ = sfx::Sprite(window_centre, Global::TextureManager.Load("car.png"));
 
-	displacement_->setEnabled(true);
-	displacement_->setName("Displacement");
-	displacement_->setRange(-1.000, 1.000);
-	displacement_->addTerm(new fl::Triangle("FarLeft", -1.500, -1.000, -0.500));
-	displacement_->addTerm(new fl::Triangle("Left", -1.000, -0.500, 0.000));
-	displacement_->addTerm(new fl::Triangle("Centre", -0.200, 0.000, 0.200));
-	displacement_->addTerm(new fl::Triangle("Right", 0.000, 0.500, 1.000));
-	displacement_->addTerm(new fl::Triangle("FarRight", 0.500, 1.000, 1.500));
-	engine_->addInputVariable(displacement_.get());
+	steering_indicator_ = sfx::Sprite(window_centre, Global::TextureManager.Load("steering_indicator.png"));
 
-	velocity_->setEnabled(true);
+	pause_overlay = sfx::Sprite(window_centre, Global::TextureManager.Load("pause_overlay.png"));
+
+	displacement_ = new fl::InputVariable("Displacement", -1.0f, 1.0f);
+	displacement_->setTerms({
+		new fl::Ramp("FarLeft", -0.500, -1.000),
+		new fl::Triangle("Left", -1.000, -0.500, 0.000),
+		new fl::Triangle("Centre", -0.200, 0.000, 0.200),
+		new fl::Triangle("Right", 0.000, 0.500, 1.000),
+		new fl::Ramp("FarRight", 0.500, 1.000)
+	});
+	engine_->addInputVariable(displacement_);
+
 	velocity_->setName("Velocity");
 	velocity_->setRange(-1.000, 1.000);
-	velocity_->addTerm(new fl::Triangle("FarLeft", -1.500, -1.000, -0.500));
+	velocity_->addTerm(new fl::Ramp("FarLeft", -0.500,-1.000));
 	velocity_->addTerm(new fl::Triangle("Left", -1.000, -0.500, 0.000));
 	velocity_->addTerm(new fl::Triangle("Zero", -0.200, 0.000, 0.200));
 	velocity_->addTerm(new fl::Triangle("Right", 0.000, 0.500, 1.000));
-	velocity_->addTerm(new fl::Triangle("FarRight", 0.500, 1.000, 1.500));
-	engine_->addInputVariable(velocity_.get());
-
+	velocity_->addTerm(new fl::Ramp("FarRight", 0.500, 1.000));
+	engine_->addInputVariable(velocity_);
 
 	steering_->setName("Steering");
 	steering_->setRange(-1.000, 1.000);
-	steering_->addTerm(new fl::Triangle("FarLeft", -1.500, -1.000, -0.500));
+	steering_->addTerm(new fl::Ramp("FarLeft", -0.500, -1.000));
 	steering_->addTerm(new fl::Triangle("Left", -1.000, -0.500, 0.000));
 	steering_->addTerm(new fl::Triangle("Zero", -0.200, 0.000, 0.200));
 	steering_->addTerm(new fl::Triangle("Right", 0.000, 0.500, 1.000));
-	steering_->addTerm(new fl::Triangle("FarRight", 0.500, 1.000, 1.500));
-	engine_->addOutputVariable(steering_.get());
+	steering_->addTerm(new fl::Ramp("FarRight", 0.500, 1.000));
+	engine_->addOutputVariable(steering_);
 
 	// Far Left
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is FarRight then Steering is Zero", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Right then Steering is Right", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Zero then Steering is FarRight", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Left then Steering is FarRight", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is FarLeft then Steering is FarRight", engine_.get()));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is FarRight then Steering is Zero", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Right then Steering is Right", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Zero then Steering is FarRight", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Left then Steering is FarRight", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is FarLeft then Steering is FarRight", engine_));
 
 	// Left
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Left and Velocity is FarRight then Steering is Left", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Left and Velocity is Right then Steering is Zero", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Left and Velocity is Zero then Steering is Right", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Left and Velocity is Left then Steering is FarRight", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Left and Velocity is FarLeft then Steering is FarRight", engine_.get()));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left and Velocity is FarRight then Steering is Left", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left and Velocity is Right then Steering is Zero", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left and Velocity is Zero then Steering is Right", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left and Velocity is Left then Steering is FarRight", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left and Velocity is FarLeft then Steering is FarRight", engine_));
 
 	// Centre
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is FarRight then Steering is FarLeft", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Right then Steering is Left", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Zero then Steering is Zero", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Left then Steering is Right", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is FarLeft then Steering is FarRight", engine_.get()));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is FarRight then Steering is FarLeft", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Right then Steering is Left", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Zero then Steering is Zero", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Left then Steering is Right", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is FarLeft then Steering is FarRight", engine_));
 
 	// Right
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Right and Velocity is FarRight then Steering is FarLeft", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Right and Velocity is Right then Steering is FarLeft", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Right and Velocity is Zero then Steering is Left", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Right and Velocity is Left then Steering is Zero", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Right and Velocity is FarLeft then Steering is Right", engine_.get()));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right and Velocity is FarRight then Steering is FarLeft", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right and Velocity is Right then Steering is FarLeft", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right and Velocity is Zero then Steering is Left", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right and Velocity is Left then Steering is Zero", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right and Velocity is FarLeft then Steering is Right", engine_));
 
 	// Far Right
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is FarRight then Steering is FarLeft", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Right then Steering is FarLeft", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Zero then Steering is FarLeft", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Left then Steering is Left", engine_.get()));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is FarLeft then Steering is Zero", engine_.get()));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is FarRight then Steering is FarLeft", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Right then Steering is FarLeft", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Zero then Steering is FarLeft", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Left then Steering is Left", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is FarLeft then Steering is Zero", engine_));
 
-	engine_->addRuleBlock(rule_block_.get());
+	engine_->addRuleBlock(rule_block_);
 
 	engine_->configure("Minimum", "", "Minimum", "Maximum", "Centroid");
 
@@ -122,44 +123,11 @@ bool AI_App::Initialize()
 							"The following errors were encountered:\n" + status, FL_AT);
 	}
 
-	Log::Message("Fuzzy Car Controller Initialized.");
+	Log::Message("Setup Successful.");
+	std::cout << std::endl;
+	Log::Message("Welcome to the Fuzzy Car Controller!");
 
-	Log::Message("Choose Displacement between -1 and 1 : ");
-	std::cin >> displacement;
-	while (displacement < -1 || displacement > 1)
-	{
-		Log::Error("Displacement is invalid. Enter a displacement between -1 and 1: ");
-		std::cin >> displacement;
-	}
-	displacement_->setInputValue(displacement);
-
-	Log::Message("Choose a velocity between -1 and 1 : ");
-	std::cin >> velocity;
-	while (velocity < -1 || velocity > 1)
-	{
-		Log::Error("Velocity is invalid. Enter a velocity between -1 and 1: ");
-		std::cin >> velocity;
-	}
-	velocity_->setInputValue(velocity);
-
-	std::string answer;
-	Log::Message("Animate car continuous or discretely? (C/D)");
-	Log::Message("Continuous - car will animate in real time.");
-	Log::Message("Discrete - car steps once every time spacebar is pressed.");
-	std::cin >> answer;
-	while (!(answer == "C" || answer == "c" || answer == "D" || answer == "d"))
-	{
-		Log::Error("Invalid input. Please enter C for Continuous or D for Discrete.");
-		std::cin >> answer;
-	}
-	if (answer == "C" || answer == "c")
-	{
-		real_time = true;
-	}
-	else if (answer == "D" || answer == "d")
-	{
-		real_time = false;
-	}
+	GetUserConsoleInput();
 
 	return true;
 }
@@ -170,6 +138,64 @@ void AI_App::CleanUp()
 
 void AI_App::ProcessEvent(sf::Event& _event)
 {
+}
+
+void AI_App::GetUserConsoleInput()
+{
+	Log::Message("Choose Displacement between -1 and 1 : ");
+	std::cin >> initial.displacement;
+	while (initial.displacement < -1 || initial.displacement > 1)
+	{
+		Log::Error("Displacement is invalid. Enter a displacement between -1 and 1: ");
+		std::cin >> initial.displacement;
+	}
+	displacement_->setInputValue(initial.displacement);
+
+	Log::Message("Choose a velocity between -1 and 1 : ");
+	std::cin >> initial.velocity;
+	while (initial.velocity < -1 || initial.velocity > 1)
+	{
+		Log::Error("Velocity is invalid. Enter a velocity between -1 and 1: ");
+		std::cin >> initial.velocity;
+	}
+	velocity_->setInputValue(initial.velocity);
+
+	engine_->process();
+	initial.steering = steering_->getOutputValue();
+
+	Log::Message("Engine initilization completed. Ready to run.");
+	current = initial;
+
+	UpdateGraphicsObjects();
+
+	std::string answer;
+	Log::Message("Animate car continuous or discretely? (C/D)");
+	Log::Message("Continuous - car will animate in real time.");
+	Log::Message("Discrete - car will animate one step at a time. (0.1s steps)");
+	std::cin >> answer;
+	while (!(answer == "C" || answer == "c" || answer == "D" || answer == "d"))
+	{
+		Log::Error("Invalid input. Please enter C for Continuous or D for Discrete.");
+		std::cin >> answer;
+	}
+	if (answer == "C" || answer == "c")
+	{
+		real_time = true;
+		paused = true;
+		Log::Message("The SFML window will now animate the car.");
+		Log::Message("Press spacebar to pause/unpause the animation.");
+		Log::Message("Press R to reset the animation.");
+		Log::Message("Press S to restart with new input values.");
+	}
+	else if (answer == "D" || answer == "d")
+	{
+		real_time = false;
+		paused = false;
+		Log::Message("The SFML window will now animate the car.");
+		Log::Message("Press spacebar to step forward the animation.");
+		Log::Message("Press R to reset the animation.");
+		Log::Message("Press S to restart with new input values.");
+	}
 }
 
 bool AI_App::ConvertAnswerToBool(std::string & _user_input)
@@ -193,52 +219,71 @@ bool AI_App::ConvertAnswerToBool(std::string & _user_input)
 	return answer;
 }
 
+void AI_App::UpdateGraphicsObjects()
+{
+	car_.setPosition(window_centre.x + current.displacement * 300.0f, car_.getPosition().y);
+	car_.setRotation(current.velocity * 90.0f);
+
+	steering_indicator_.setPosition(car_.getPosition());
+	steering_indicator_.setRotation(current.steering * 90.0f);
+
+	std::string output;
+	output.append("Displacement: " + agn::to_string_precise(current.displacement, 1));
+	output.append(" Velocity: " + agn::to_string_precise(current.velocity, 1));
+	output.append(" Steering: " + agn::to_string_precise(current.steering, 1));
+	output_.setString(output);
+}
+
 bool AI_App::Update()
 {
 	auto delta_time = clock_.getLastFrameTime();
 
 	if(real_time)
 	{
-		velocity += steering * delta_time.asSeconds();
-		velocity_->setInputValue(velocity);
+		if (!paused)
+		{
+			current.velocity += current.steering * delta_time.asSeconds();
+			velocity_->setInputValue(current.velocity);
 
-		displacement += velocity * delta_time.asSeconds();
-		displacement_->setInputValue(displacement);
+			current.displacement += current.velocity * delta_time.asSeconds();
+			displacement_->setInputValue(current.displacement);
 
-		car_.setPosition(window_centre.x + displacement * 300.0f, car_.getPosition().y);
-		car_.setRotation(steering * 90.0f);
+			engine_->process();
+			current.steering = steering_->getOutputValue();
 
-		engine_->process();
-		steering = steering_->getOutputValue();
+			UpdateGraphicsObjects();
+		}
 
-		std::string output;
-		output.append("Displacement: "+ agn::to_string_precise(displacement, 1));
-		output.append(" Velocity: " + agn::to_string_precise(velocity, 1));
-		output.append(" Steering: " + agn::to_string_precise(steering, 1));
-		output_.setString(output);
+		if (Global::Input.KeyPressed(sf::Keyboard::Space))
+		{
+			paused = !paused;
+		}
 	}
 	else
 	{
 		if (Global::Input.KeyPressed(sf::Keyboard::Space))
 		{
-			velocity += steering * 0.1f;
-			velocity_->setInputValue(velocity);
+			current.velocity += current.steering * 0.1f;
+			velocity_->setInputValue(current.velocity);
 
-			displacement += velocity * 0.1f;
-			displacement_->setInputValue(displacement);
-
-			car_.setPosition(window_centre.x + displacement * 300.0f, car_.getPosition().y);
-			car_.setRotation(steering * 90.0f);
+			current.displacement += current.velocity * 0.1f;
+			displacement_->setInputValue(current.displacement);
 
 			engine_->process();
-			steering = steering_->getOutputValue();
+			current.steering = steering_->getOutputValue();
 
-			std::string output;
-			output.append("Displacement: " + agn::to_string_precise(displacement, 1));
-			output.append(" Velocity: " + agn::to_string_precise(velocity, 1));
-			output.append(" Steering: " + agn::to_string_precise(steering, 1));
-			output_.setString(output);
+			UpdateGraphicsObjects();
 		}
+	}
+
+	if (Global::Input.KeyPressed(sf::Keyboard::R))
+	{
+		current = initial;
+	}
+
+	if (Global::Input.KeyPressed(sf::Keyboard::S))
+	{
+		GetUserConsoleInput();
 	}
 	
 	return true;
@@ -248,9 +293,13 @@ void AI_App::Render()
 {
 	window_.draw(line_);
 	window_.draw(car_);
+	window_.draw(steering_indicator_);
 
-	output_.move(0.0f, -output_.getLocalBounds().height);
+	output_.setOrigin(output_.getLocalBounds().width / 2.0f, output_.getLocalBounds().height);
+	output_.setPosition(window_centre.x, window_.getSize().y - (output_.getLocalBounds().height));
 	window_.draw(output_);
-	output_.move(0.0f, output_.getLocalBounds().height);
+
+	if(paused)
+		window_.draw(pause_overlay);
 }
 

@@ -1,7 +1,6 @@
 #pragma once
-#include <SFML_Extensions\System\application.h>
 #include <Fuzzylite\fl\Headers.h>
-#include <memory>
+#include <SFML_Extensions\System\application.h>
 #include <SFML_Extensions\Graphics\sprite.h>
 
 class AI_App : public sfx::Application
@@ -18,24 +17,35 @@ private:
 	void Render();
 	void ProcessEvent(sf::Event& _event);
 
+	void GetUserConsoleInput();
 	bool ConvertAnswerToBool(std::string& _user_input);
 
-	std::unique_ptr<fl::Engine> engine_;
+	void UpdateGraphicsObjects();
 
-	std::unique_ptr<fl::InputVariable> displacement_;
-	std::unique_ptr<fl::InputVariable> velocity_;
+	fl::Engine* engine_;
 
-	std::unique_ptr<fl::OutputVariable> steering_;
+	fl::InputVariable* displacement_;
+	fl::InputVariable* velocity_;
 
-	std::unique_ptr<fl::RuleBlock> rule_block_;
+	fl::OutputVariable* steering_;
 
-	double displacement;
-	double velocity;
-	double steering;
+	fl::RuleBlock* rule_block_;
+
+	struct Parameters
+	{
+		double displacement;
+		double velocity;
+		double steering;
+	};
+	Parameters initial;
+	Parameters current;
 
 	bool real_time;
+	bool paused;
 
 	sf::Text output_;
 	sfx::Sprite line_;
 	sfx::Sprite car_;
+	sfx::Sprite steering_indicator_;
+	sfx::Sprite pause_overlay;
 };

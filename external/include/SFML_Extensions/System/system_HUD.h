@@ -57,6 +57,7 @@ namespace sfx
 		{
 			std::ostringstream os;
 			os.precision(3);
+			os.setf(std::ios::fixed | std::ios::showpoint);
 			os << std::left << std::setw(5);
 			os << _name << ": ";
 			os << std::setw(5);

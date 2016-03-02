@@ -22,7 +22,7 @@ namespace agn
 			{
 				std::cerr << TimeStamp().c_str();
 			}
-			std::cerr << "FATAL ERROR: " << _message.c_str() << std::endl;
+			std::cerr << "<FATAL ERROR> " << _message.c_str() << std::endl;
 
 #ifdef _DEBUG
 			abort();
@@ -41,7 +41,7 @@ namespace agn
 				{
 					std::cerr << TimeStamp().c_str();
 				}
-				std::cerr << "ERROR: " << _message.c_str() << std::endl;
+				std::cerr << "<ERROR>" << _message.c_str() << std::endl;
 			}
 		}
 
@@ -55,7 +55,7 @@ namespace agn
 				{
 					std::cerr << TimeStamp().c_str();
 				}
-				std::cerr << "WARNING: " << _message.c_str() << std::endl;
+				std::cerr << "<WARNING> " << _message.c_str() << std::endl;
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace agn
 				{
 					std::cout << TimeStamp().c_str();
 				}
-				std::cout << "Important: " << _message.c_str() << std::endl;
+				std::cout << "<Important> " << _message.c_str() << std::endl;
 			}
 		}
 
@@ -83,7 +83,7 @@ namespace agn
 				{
 					std::cout << TimeStamp().c_str();
 				}
-				std::cout << ": " << _message.c_str() << std::endl;
+				std::cout << _message.c_str() << std::endl;
 			}
 		}
 
@@ -135,7 +135,7 @@ namespace agn
 		{
 			std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 			char time[100];
-			std::strftime(time, sizeof(time), "[%x : %X]", std::localtime(&now));
+			std::strftime(time, sizeof(time), "[%x : %X] ", std::localtime(&now));
 			return(time);
 		}
 	};
