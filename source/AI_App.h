@@ -40,9 +40,12 @@ private:
 	Parameters initial;
 	Parameters current;
 
+	float timestep;
+
 	bool real_time;
 	bool paused;
 
+	sf::Text timestep_;
 	sf::Text output_;
 	sfx::Sprite line_;
 	sfx::Sprite car_;
