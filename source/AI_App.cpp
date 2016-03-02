@@ -12,8 +12,6 @@ namespace
 AI_App::AI_App(sf::RenderWindow& _window) :
 	Application(_window),
 	engine_(new fl::Engine("Fuzzy Car Controller")),
-	velocity_(new fl::InputVariable),
-	steering_(new fl::OutputVariable),
 	rule_block_(new fl::RuleBlock),
 	initial(),
 	current(),
@@ -50,17 +48,14 @@ bool AI_App::Initialize()
 	pause_overlay = sfx::Sprite(window_centre, Global::TextureManager.Load("pause_overlay.png"));
 
 	displacement_ = new fl::InputVariable("Displacement", -1.0f, 1.0f);
-	displacement_->setTerms({
-		new fl::Ramp("FarLeft", -0.500, -1.000),
-		new fl::Triangle("Left", -1.000, -0.500, 0.000),
-		new fl::Triangle("Centre", -0.200, 0.000, 0.200),
-		new fl::Triangle("Right", 0.000, 0.500, 1.000),
-		new fl::Ramp("FarRight", 0.500, 1.000)
-	});
+	displacement_->addTerm(new fl::Ramp("FarLeft", -0.500, -1.000));
+	displacement_->addTerm(new fl::Triangle("Left", -1.000, -0.500, 0.000));
+	displacement_->addTerm(new fl::Triangle("Centre", -0.200, 0.000, 0.200));
+	displacement_->addTerm(new fl::Triangle("Right", 0.000, 0.500, 1.000));
+	displacement_->addTerm(new fl::Ramp("FarRight", 0.500, 1.000));
 	engine_->addInputVariable(displacement_);
 
-	velocity_->setName("Velocity");
-	velocity_->setRange(-1.000, 1.000);
+	velocity_ = new fl::InputVariable("Velocity", -1.0f, 1.0f);
 	velocity_->addTerm(new fl::Ramp("FarLeft", -0.500,-1.000));
 	velocity_->addTerm(new fl::Triangle("Left", -1.000, -0.500, 0.000));
 	velocity_->addTerm(new fl::Triangle("Zero", -0.200, 0.000, 0.200));
@@ -68,8 +63,7 @@ bool AI_App::Initialize()
 	velocity_->addTerm(new fl::Ramp("FarRight", 0.500, 1.000));
 	engine_->addInputVariable(velocity_);
 
-	steering_->setName("Steering");
-	steering_->setRange(-1.000, 1.000);
+	steering_ = new fl::OutputVariable("Steering", -1.0f, 1.0f);
 	steering_->addTerm(new fl::Ramp("FarLeft", -0.500, -1.000));
 	steering_->addTerm(new fl::Triangle("Left", -1.000, -0.500, 0.000));
 	steering_->addTerm(new fl::Triangle("Zero", -0.200, 0.000, 0.200));
