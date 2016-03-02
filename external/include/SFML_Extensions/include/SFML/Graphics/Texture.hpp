@@ -472,6 +472,9 @@ public:
     /// You can expect a value of 512 pixels for low-end graphics
     /// card, and up to 8192 pixels or more for newer hardware.
     ///
+    /// Note: The first call to this function, whether by your
+    /// code or SFML will result in a context switch.
+    ///
     /// \return Maximum size allowed for textures, in pixels
     ///
     ////////////////////////////////////////////////////////////
@@ -506,7 +509,6 @@ private:
     bool         m_isSmooth;      ///< Status of the smooth filter
     bool         m_isRepeated;    ///< Is the texture in repeat mode?
     mutable bool m_pixelsFlipped; ///< To work around the inconsistency in Y orientation
-    bool         m_fboAttachment; ///< Is this texture owned by a framebuffer object?
     Uint64       m_cacheId;       ///< Unique number that identifies the texture to the render target's cache
 };
 

@@ -30,7 +30,6 @@
 ////////////////////////////////////////////////////////////
 #include <SFML/Network/Export.hpp>
 #include <SFML/Network/Socket.hpp>
-#include <SFML/Network/IpAddress.hpp>
 
 
 namespace sf
@@ -72,15 +71,14 @@ public:
     /// If the socket was previously listening to another port,
     /// it will be stopped first and bound to the new port.
     ///
-    /// \param port    Port to listen for new connections
-    /// \param address Address of the interface to listen on
+    /// \param port Port to listen for new connections
     ///
     /// \return Status code
     ///
     /// \see accept, close
     ///
     ////////////////////////////////////////////////////////////
-    Status listen(unsigned short port, const IpAddress& address = IpAddress::Any);
+    Status listen(unsigned short port);
 
     ////////////////////////////////////////////////////////////
     /// \brief Stop listening and close the socket

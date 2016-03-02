@@ -136,7 +136,7 @@ private:
 
 
 ////////////////////////////////////////////////////////////
-/// \class sf::FileInputStream
+/// \class FileInputStream
 /// \ingroup system
 ///
 /// This class is a specialization of InputStream that
@@ -153,17 +153,17 @@ private:
 ///
 /// SFML resource classes can usually be loaded directly from
 /// a filename, so this class shouldn't be useful to you unless
-/// you create your own algorithms that operate on an InputStream.
+/// you create your own algorithms that operate on a InputStream.
 ///
 /// Usage example:
 /// \code
 /// void process(InputStream& stream);
 ///
-/// FileInputStream stream;
+/// FileStream stream;
 /// if (stream.open("some_file.dat"))
 ///    process(stream);
 /// \endcode
 ///
-/// InputStream, MemoryInputStream
+/// InputStream, MemoryStream
 ///
 ////////////////////////////////////////////////////////////
