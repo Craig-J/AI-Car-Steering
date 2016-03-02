@@ -71,7 +71,7 @@ public:
     /// \brief Get the current position of a touch in window coordinates
     ///
     /// This function returns the current touch position
-    /// relative to the given window.
+    /// in global (desktop) coordinates.
     ///
     /// \param finger Finger index
     /// \param relativeTo Reference window

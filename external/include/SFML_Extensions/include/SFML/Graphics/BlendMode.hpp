@@ -68,9 +68,8 @@ struct SFML_GRAPHICS_API BlendMode
     ////////////////////////////////////////////////////////
     enum Equation
     {
-        Add,            ///< Pixel = Src * SrcFactor + Dst * DstFactor
-        Subtract,       ///< Pixel = Src * SrcFactor - Dst * DstFactor
-        ReverseSubtract ///< Pixel = Dst * DstFactor - Src * SrcFactor
+        Add,     ///< Pixel = Src * SrcFactor + Dst * DstFactor
+        Subtract ///< Pixel = Src * SrcFactor - Dst * DstFactor
     };
 
     ////////////////////////////////////////////////////////////

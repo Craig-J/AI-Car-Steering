@@ -98,7 +98,8 @@ public:
     /// advanced OpenGL context settings such as antialiasing,
     /// depth-buffer bits, etc.
     ///
-    /// \param handle   Platform-specific handle of the control
+    /// \param handle   Platform-specific handle of the control (\a HWND on
+    ///                 Windows, \a %Window on Linux/FreeBSD, \a NSWindow on OS X)
     /// \param settings Additional settings for the underlying OpenGL context
     ///
     ////////////////////////////////////////////////////////////
@@ -142,7 +143,8 @@ public:
     /// advanced OpenGL context settings such as antialiasing,
     /// depth-buffer bits, etc.
     ///
-    /// \param handle   Platform-specific handle of the control
+    /// \param handle   Platform-specific handle of the control (\a HWND on
+    ///                 Windows, \a %Window on Linux/FreeBSD, \a NSWindow on OS X)
     /// \param settings Additional settings for the underlying OpenGL context
     ///
     ////////////////////////////////////////////////////////////
@@ -457,6 +459,8 @@ public:
     /// You shouldn't need to use this function, unless you have
     /// very specific stuff to implement that SFML doesn't support,
     /// or implement a temporary workaround until a bug is fixed.
+    /// The type is \a HWND on Windows, \a %Window on Linux/FreeBSD
+    /// and \a NSWindow on OS X.
     ///
     /// \return System handle of the window
     ///
