@@ -18,7 +18,7 @@ private:
 	void ProcessEvent(sf::Event& _event);
 
 	void GetUserConsoleInput();
-	bool ConvertAnswerToBool(std::string& _user_input);
+	//bool ConvertAnswerToBool(std::string& _user_input);
 
 	void UpdateGraphicsObjects();
 
@@ -40,7 +40,18 @@ private:
 	Parameters initial;
 	Parameters current;
 
+	struct Set
+	{
+		double min, max;
+		unsigned int mf_count;
+	};
+	Set displacement_set;
+	Set velocity_set;
+	Set steering_set;
+
 	float timestep;
+	unsigned int number_input_terms_;
+	unsigned int number_output_terms_;
 
 	bool real_time;
 	bool paused;
