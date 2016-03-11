@@ -340,8 +340,8 @@ bool AI_App::Initialize()
 	pause_overlay = sfx::Sprite(window_centre, Global::TextureManager.Load("pause_overlay.png"));
 
 	// Setup of term counts for NxNxM generalization.
-	number_input_terms_ = 5;
-	number_output_terms_ = 9;
+	number_input_terms_ = 7;
+	number_output_terms_ = 13;
 
 	// Displacement Setup
 	displacement_set.min = -1.0f;
@@ -381,37 +381,65 @@ bool AI_App::Initialize()
 
 	// Far Left
 	//rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is FarLeft then Steering is FarRight", engine_));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Left1 then Steering is FarRight", engine_));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Centre then Steering is FarRight", engine_));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Right1 then Steering is Right1", engine_));
-	//rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is FarRight then Steering is Zero", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Left2 then Steering is Right5", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Left1 then Steering is Right4", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Centre then Steering is Right3", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Right1 then Steering is Right2", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is Right2 then Steering is Right1", engine_));
+	//rule_block_->addRule(fl::Rule::parse("if Displacement is FarLeft and Velocity is FarRight then Steering is Centre", engine_));
 
-	// Left
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Left1 and Velocity is FarLeft then Steering is FarRight", engine_));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Left1 and Velocity is Left1 then Steering is FarRight", engine_));
+	// Left2
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left2 and Velocity is FarLeft then Steering is Right5", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left2 and Velocity is Left2 then Steering is Right4", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left2 and Velocity is Left1 then Steering is Right3", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left2 and Velocity is Centre then Steering is Right2", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left2 and Velocity is Right1 then Steering is Right1", engine_));
+	//rule_block_->addRule(fl::Rule::parse("if Displacement is Left2 and Velocity is Right2 then Steering is Centre", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left2 and Velocity is FarRight then Steering is Left1", engine_));
+
+	// Left1
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left1 and Velocity is FarLeft then Steering is Right4", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left1 and Velocity is Left2 then Steering is Right3", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left1 and Velocity is Left1 then Steering is Right2", engine_));
 	rule_block_->addRule(fl::Rule::parse("if Displacement is Left1 and Velocity is Centre then Steering is Right1", engine_));
-	//rule_block_->addRule(fl::Rule::parse("if Displacement is Left and Velocity is Right then Steering is Zero", engine_));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Left1 and Velocity is FarRight then Steering is Left1", engine_));
+	//rule_block_->addRule(fl::Rule::parse("if Displacement is Left1 and Velocity is Right1 then Steering is Centre", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left1 and Velocity is Right2 then Steering is Left1", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Left1 and Velocity is FarRight then Steering is Left2", engine_));
 
 	// Centre
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is FarLeft then Steering is FarRight", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is FarLeft then Steering is Right3", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Left2 then Steering is Right2", engine_));
 	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Left1 then Steering is Right1", engine_));
-	//rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Zero then Steering is Zero", engine_));
+	//rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Centre then Steering is Centre", engine_));
 	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Right1 then Steering is Left1", engine_));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is FarRight then Steering is FarLeft", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is Right2 then Steering is Left2", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Centre and Velocity is FarRight then Steering is Left3", engine_));
 
-	// Right
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Right1 and Velocity is FarLeft then Steering is Right1", engine_));
-	//rule_block_->addRule(fl::Rule::parse("if Displacement is Right and Velocity is Left then Steering is Zero", engine_));
+	// Right1
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right1 and Velocity is FarLeft then Steering is Right2", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right1 and Velocity is Left2 then Steering is Right1", engine_));
+	//rule_block_->addRule(fl::Rule::parse("if Displacement is Right1 and Velocity is Left1 then Steering is Centre", engine_));
 	rule_block_->addRule(fl::Rule::parse("if Displacement is Right1 and Velocity is Centre then Steering is Left1", engine_));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Right1 and Velocity is Right1 then Steering is FarLeft", engine_));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is Right1 and Velocity is FarRight then Steering is FarLeft", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right1 and Velocity is Right1 then Steering is Left2", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right1 and Velocity is Right2 then Steering is Left3", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right1 and Velocity is FarRight then Steering is Left4", engine_));
+
+	// Right2
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right2 and Velocity is FarLeft then Steering is Right1", engine_));
+	//rule_block_->addRule(fl::Rule::parse("if Displacement is Right2 and Velocity is Left2 then Steering is Centre", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right2 and Velocity is Left1 then Steering is Left1", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right2 and Velocity is Centre then Steering is Left2", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right2 and Velocity is Right1 then Steering is Left3", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right2 and Velocity is Right2 then Steering is Left4", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is Right2 and Velocity is FarRight then Steering is Left5", engine_));
 
 	// Far Right
-	//rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is FarLeft then Steering is Zero", engine_));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Left1 then Steering is Left1", engine_));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Centre then Steering is FarLeft", engine_));
-	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Right1 then Steering is FarLeft", engine_));
+	//rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is FarLeft then Steering is Centre", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Left2 then Steering is Left1", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Left1 then Steering is Left2", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Centre then Steering is Left3", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Right1 then Steering is Left4", engine_));
+	rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is Right2 then Steering is Left5", engine_));
 	//rule_block_->addRule(fl::Rule::parse("if Displacement is FarRight and Velocity is FarRight then Steering is FarLeft", engine_));
 
 	engine_->addRuleBlock(rule_block_);
